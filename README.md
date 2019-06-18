@@ -12,5 +12,5 @@ It's been developed during a *Udemy's* course __Learn Python by Building a Block
  
 []Finally submit a valid BlockChain
  
-__*Note :*__More Checks will be added later ...
+*Note :*More Checks will be added later ...
   
