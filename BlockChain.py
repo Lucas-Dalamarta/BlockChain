@@ -1,12 +1,16 @@
-global BlockChain , Choice 
+global BlockChain , Choice
+
+#   Initalizing variables
+#   Thinking on a way to use OOP in this project , just to be fun
 BlockChain  =   [[1]]
-Choice = 1
+Choice      =   1
 
 def messages(sample):
     return  print("Invalid value , please , Try Again")
 
+
 def formats(text,counts):
-    """Returns a print , given character and how many loops"""
+    """Returns a print , given character and lenght"""
     printable = ""
 
     for i in range(counts):
@@ -22,11 +26,13 @@ def lastValue():
 def SetValue(new_value):
     """Receives and appends a new value to the BlockChain"""
     BlockChain.append([lastValue(),new_value])
+    return
 
 
 def getBlockChain():
     """Returns BlockChain"""
     return print(BlockChain)
+
 
 formats("-",60)
 print("\tHello ! Welcome to Luk3's BlockChain")

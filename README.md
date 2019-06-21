@@ -6,6 +6,7 @@ It's been developed during a *Udemy's* course __Learn Python by Building a Block
 
 - [x] Start a simple BlockChain 
 - [x] Develop functions , and make the __code easier to read__
+- [ ] Start using OOP in the project (Must learn how to do so in Python)
 - [ ] Get a more complex and valid BlockChain
 - [ ] Finally submit a valid BlockChain
  
