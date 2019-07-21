@@ -34,15 +34,26 @@ def getBlockChain():
     return print(BlockChain)
 
 
+def verifyBlockChain():
+    for block_index in range(len(BlockChain)):
+        if  block_index == 0:
+            continue
+        elif    BlockChain[block_index][0]  ==  BlockChain[block_index - 1]:
+            return True
+        else:
+            return False
+
+
 formats("-",60)
 print("\tHello ! Welcome to Luk3's BlockChain")
 formats("-",60)
 
 while Choice != 0:
 
-    print("1 - For new entry :")
-    print("2 - To visualize BlockChain :")
-    print("0 - To quit :")
+    print("1 - New transaction :")
+    print("2 - Visualize BlockChain :")
+    print("3 - Validate BlockChain :")
+    print("0 - Quit :")
     print("\n\n\t")
     Choice = int(input())
 
@@ -59,6 +70,11 @@ while Choice != 0:
         SetValue(value)
     elif Choice == 2 :
         getBlockChain()
+    elif Choice == 3 :
+        if verifyBlockChain() == True:
+            print("\tCurrent BlockChain is valid !")
+        else:
+            print("\tCurrent BlockChain is NOT valid !")
     else:
         break
     continue
