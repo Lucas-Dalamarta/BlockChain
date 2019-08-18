@@ -15,6 +15,9 @@ def messages(code):
     """ Receives a code , acording to which message is to be shown \n
         1 : ValueError
     """
+    #   I thought about passing the errors as arguments, but dropped it
+    #   Might come back later
+    
     if      code == 1:  return  print("Invalid value , please , Try Again")
     elif    code == 2:  return  print("")
 
@@ -62,8 +65,18 @@ def getBlockChain():
 
 def getTransactionValue():
     """ Asks for recipent , then how much will be transfered"""
+    while True: 
+        try:
+            amount      =   float(input('Enter the transaction amount:'))
+            if amount <= 0:
+                raise ValueError
+        except  ValueError:
+            messages(1)
+            continue
+        break
+
     recipient   =   input('Enter recipient of the transaction:')
-    amount      =   float(input('Enter the transaction amount:'))
+    
     return(recipient,amount)
 
 
@@ -93,15 +106,6 @@ while Choice != 0:
     Choice = int(input())
 
     if Choice == 1 :
-        while True: 
-            try:
-                value = float(input("Enter value :\t"))
-                if value <= 0:
-                    raise ValueError
-            except  ValueError:
-                messages("Error")
-                continue
-            break
         data_transacition = getTransactionValue()
         addTransaction(data_transacition)
         #addTransaction(getTransactionValue())  ??  Would this work ?
