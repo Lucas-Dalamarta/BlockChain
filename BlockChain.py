@@ -1,21 +1,38 @@
+###############################################################################
 global BlockChain , Choice
-
-#   Initalizing variables
-#   Thinking on a way to use OOP in this project , just to be fun
+###############################################################################
+Choice  =   1
+owner   = 'Luk3'
 BlockChain  =   [[1]]
-Choice      =   1
+genesysBlock    =   {
+    'PreviousHash':'',
+    'Index':0,
+    'Transactions':[]
+}
+openTransactions    =   []
+###############################################################################
+def messages(code):
+    """ Receives a code , acording to which message is to be shown \n
+        1 : ValueError
+    """
+    if      code == 1:  return  print("Invalid value , please , Try Again")
+    elif    code == 2:  return  print("")
 
-def messages(sample):
-    return  print("Invalid value , please , Try Again")
+
+def printChar(char):
+    return  print(char*60)
 
 
-def formats(text,counts):
-    """Returns a print , given character and lenght"""
-    printable = ""
-
-    for i in range(counts):
-        printable   += text
-    return  print(printable)
+def mineBlock():
+    """ Mines a new block , for now , it uses standard values"""
+    lastBlock = BlockChain[-1]
+    block = {   
+            'PreviousHash':'ABC',
+            'Index':len(BlockChain),
+            'Transactions':openTransactions
+            }
+    BlockChain.append(block)
+    pass
 
 
 def lastValue():
@@ -23,15 +40,31 @@ def lastValue():
     return  BlockChain[-1]
 
 
-def SetValue(new_value):
-    """Receives and appends a new value to the BlockChain"""
-    BlockChain.append([lastValue(),new_value])
-    return
+def addTransaction(sender,recipient,amount=1.0):
+    """ Receives and appends a new value to the BlockChain
+        :sender:    Sends the coins
+        :recipient: Receives the coins
+        :amount:How much coins where transfered in a transacion (Default = 1.0) 
+    """
+
+    transaction =   {
+        'Sender'    :sender,
+        'Recipient' :recipient,
+        'Amount'    :amount
+    }
+    openTransactions.append(transaction)
 
 
 def getBlockChain():
     """Returns BlockChain"""
     return print(BlockChain)
+
+
+def getTransactionValue():
+    """ Asks for recipent , then how much will be transfered"""
+    recipient   =   input('Enter recipient of the transaction:')
+    amount      =   float(input('Enter the transaction amount:'))
+    return(recipient,amount)
 
 
 def verifyBlockChain():
@@ -43,13 +76,15 @@ def verifyBlockChain():
         else:
             return False
 
+###############################################################################
+###                                 MAIN                                    ###
+###############################################################################
 
-formats("-",60)
+printChar("*")
 print("\tHello ! Welcome to Luk3's BlockChain")
-formats("-",60)
+printChar("*")
 
 while Choice != 0:
-
     print("1 - New transaction :")
     print("2 - Visualize BlockChain :")
     print("3 - Validate BlockChain :")
@@ -67,7 +102,9 @@ while Choice != 0:
                 messages("Error")
                 continue
             break
-        SetValue(value)
+        data_transacition = getTransactionValue()
+        addTransaction(data_transacition)
+        #addTransaction(getTransactionValue())  ??  Would this work ?
     elif Choice == 2 :
         getBlockChain()
     elif Choice == 3 :
@@ -79,6 +116,8 @@ while Choice != 0:
         break
     continue
 
-formats("*",60)
+printChar("*")
 print("\tThanks for using Luk3's BlockChain")
-formats("*",60)
+printChar("*")
+
+###############################################################################
