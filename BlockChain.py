@@ -26,12 +26,16 @@ def printChar(char):
     return  print(char*60)
 
 
+def hashBlock(block):
+    return   '-'.join([str(block[key]) for key in block])
+
+
 def mineBlock():
     """ Mines a new block , for now , it uses standard values"""
     lastBlock = BlockChain[-1]
     
     #   With List Comprehensions
-    hashedBlock =   ' - '.join([str(lastBlock[key]) for key in lastBlock])
+    hashedBlock =  hashBlock(lastBlock)
     #   SO , the .join function , goes through the List , and appends a  ' - ' between elements , but it only works in strings , which is why str was used
 
     #   Without List Comprehensions    
@@ -90,13 +94,13 @@ def getTransactionValue():
 
 
 def verifyBlockChain():
-    for block_index in range(len(BlockChain)):
-        if  block_index == 0:
+    for (index,block) in enumerate(BlockChain):
+        if index == 0:
             continue
-        elif    BlockChain[block_index][0]  ==  BlockChain[block_index - 1]:
-            return True
-        else:
+        if block['PreviousHash'] != hashBlock(BlockChain[index -1]):
             return False
+    return True
+
 
 ###############################################################################
 ###                                 MAIN                                    ###
@@ -109,8 +113,7 @@ printChar("*")
 while Choice != 0:
     print("1 - New transaction :")
     print("2 - Visualize BlockChain :")
-    print("3 - Validate BlockChain :")
-    print("4 - Mine Block :")
+    print("3 - Mine Block :")
     print("0 - Quit :")
     print("\n\n\t")
     Choice = int(input())
@@ -123,14 +126,14 @@ while Choice != 0:
     elif Choice == 2 :
         getBlockChain()
     elif Choice == 3 :
-        if verifyBlockChain() == True:
-            print("\tCurrent BlockChain is valid !")
-        else:
-            print("\tCurrent BlockChain is NOT valid !")
-    elif Choice == 4:
         mineBlock()
     else:
         break
+    
+    if not verifyBlockChain():
+        print("\tCurrent BlockChain is NOT valid !")
+    else:
+        print("\tCurrent BlockChain is valid !")
     continue
 
 printChar("*")
